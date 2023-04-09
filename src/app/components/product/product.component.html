@@ -1,0 +1,64 @@
+<div class="text-center h1 justify-content-center">
+  <img [src]="storeLogo" [alt]="storeName" />
+  <h1 class="text-center d-inline">{{ storeName | uppercase }}</h1>
+</div>
+<h3 *ngIf="discount != ''">
+  We offer an explicit discount of: {{ discount | percent }}
+</h3>
+
+<div class="container-fluid d-flex justify-content-evenly">
+  <select [(ngModel)]="selectedCategory" (change)="categoryChanger()" class="form-control-sm form-select-sm h-25 align-self-center">
+    <option value="0" selected>All</option>
+    <option *ngFor="let cat of categoryList" [value]="cat.id">
+      {{ cat.name }}
+    </option>
+  </select>
+  <div class="d-flex flex-column">
+    <label class="form-label">Client Name: {{ clientName }}</label>
+    <input
+      [(ngModel)]="clientName"
+      type="text"
+      class="form-control-sm"
+      name="cName"
+    />
+  </div>
+  <div>
+    <a class="btn btn-secondary" type="button" routerLink="AllProducts"
+      >All products</a
+    >
+  </div>
+
+  <div>
+    <a class="btn btn-success" type="button" routerLink="Deals">Today Deals</a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+<!-- <table
+  *ngIf="!isPurchased; else thankMsg"
+  class="table table-bordered table-active text-center mt-3"
+>
+  <thead>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Price</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pro of productsList">
+      <td>{{ pro.name }}</td>
+      <td>{{ pro.quantity }}</td>
+      <td>{{ pro.price }}</td>
+      <td>{{ pro.price * pro.quantity }}</td>
+    </tr>
+  </tbody>
+</table> -->
+<!-- <ng-template #thankMsg>
+  <h3 class="h1 text-center text-success">
+    Thank You {{ clientName }} for purchasing from our Store
+  </h3>
+</ng-template> -->
+<!-- <div class="d-flex justify-content-center gap-5">
+  <a (click)="buy()" class="btn btn-success">Buy</a>
+  <a (click)="buy()" class="btn btn-dark">Return</a>
+</div> -->

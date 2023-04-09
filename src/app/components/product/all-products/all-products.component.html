@@ -1,0 +1,56 @@
+<p>all-products works!</p>
+
+<div class="row justify-content-center m-5">
+  <ng-container *ngFor="let pro of productsList">
+    <div class="card col-3" *ngIf="pro.quantity != 0">
+      <div class="card-header">
+        <img [src]="pro?.img" [alt]="pro?.name" class="card-img-top w-100" />
+      </div>
+      <div class="card-body text-center">
+        <h4 class="card-title text-center h4">{{ pro?.name }}</h4>
+        <rating
+          [(ngModel)]="pro.rate"
+          [max]="maxRate"
+          [readonly]="isReadonly"
+        ></rating>
+        <p class="text-center card-text" *ngIf="pro.quantity > 0">
+          Available quantity :
+          <span [class.text-danger]="pro.quantity < 3">{{
+            pro?.quantity
+          }}</span>
+        </p>
+        <p class="text-center card-text" *ngIf="pro?.quantity == 0">
+          Out Of Stock
+        </p>
+        <p
+          class="h5"
+          [ngClass]="{ 'text-decoration-line-through': discount != '' }"
+        >
+          {{ pro?.price }}
+        </p>
+        <p *ngIf="discount != ''" class="text-success h5">
+          {{ pro.price - pro.price * +discount }}
+        </p>
+      </div>
+      <div class="card-footer card-link justify-content-center text-center">
+        <div class="mb-3">
+          <label for="" class="form-label">Select Quantity</label>
+          <input type="number" #selectedQty
+              class="form-control form-control-sm"  aria-describedby="helpId" [max]="pro?.quantity" min="0">
+        </div>
+        <a
+          #tst
+          customHover
+          class="btn btn-success"
+          data-qty="6"
+          *ngIf="pro.quantity > 0"
+          (click)="buy(pro)"
+          >Buy</a>
+          <button type="button" class="btn btn-primary" (click)="adToCart(pro, +selectedQty.value)">Add to cart</button>
+        <p class="card-text text-dark" *ngIf="pro?.quantity == 0">
+          Thank You {{ clientName }} for purchasing from our Store
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>

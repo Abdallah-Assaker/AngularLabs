@@ -1,0 +1,12 @@
+<p>child works!</p>
+
+<ul *ngIf="isGetData" class="list-group">
+    <li class="list-group-item" *ngFor="let d of parentArray">{{d}}</li>
+</ul>
+
+<a (click)="getData()" class="btn btn-success">Get Data</a>
+<hr>
+<input type="text" class="form-control" [(ngModel)]="childData"/>
+<a (click)="sendData()" class="btn btn-success">Send Data</a>
+
+

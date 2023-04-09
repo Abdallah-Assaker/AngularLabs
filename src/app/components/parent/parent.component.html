@@ -1,0 +1,8 @@
+<p>parent works!</p>
+
+<div *ngIf="childInput">
+    Child Data = {{childInput}}
+</div>
+
+
+<app-child [parentArray]="parentArray" (childInput)="onChildInput($event)"></app-child>
